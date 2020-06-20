@@ -1,0 +1,81 @@
+import random
+import string
+
+
+def create(m):  # CREATE THE BLANKS IN THE NEMAES OF THE MOVIE
+    for i in range(0, len(m)):
+        if (m[i] == 'a' or m[i] == 'e' or m[i] == 'i' or m[i] == 'o' or m[i] == 'u'):
+            pass
+        else:
+            m[i] = '_'
+    return m
+
+
+def game(m, name, movie):  # ALL THE LOGIC OF THE GAME EXISTS HERE
+
+    chances = len(m) + 2
+    print("You have", chances, "chances")
+    while (chances > 0):
+        print("chances=", chances)
+        char = input("Enter the alphabet  ")[0]
+        pos = int(input("Enter the position  "))
+        pos -= 1
+        print(movie[pos])
+        if (char[0] == movie[pos]):
+            m[pos] = char
+            print("Very well done", name)
+        else:
+            print("Better luck next time", name)
+        print("Movie-", m)
+        choice = input("You can get a hint only once wna take ")
+        if (choice == 'yes'):
+            print("First half words of movie are:")
+            for i in range(0, int(len(movie) / 2)):
+                print(movie[i], end="")
+        else:
+            pass
+        print()
+        print("Want to continue (yes/no)?")
+        choice = input()
+        if (choice == 'yes' or 'Yes'):
+            chances -= 1
+        else:
+            break
+
+    if (m == movie):
+        print("Very Good ,You are a nice player", movie)
+        return 1
+    else:
+        print("Seems You do not watch movies")
+        return 0
+
+
+# MAIN BODY STARTS HERE
+
+
+print("WELCOME :)")
+print()
+print("Enter to Virtuaal Dumb Sharates")
+print("INSTRUCTIONS:")
+print()
+print(
+    "1.An incomplete movie name will appear on the screen .You have to guess and write the missing word with its position ")
+print("2. You will be given limited chances . ALL THE BEST!")
+print()
+name = input("ENTER YOUR GAMING NAME  ")
+movies = ['carry on jatta', 'jatt and juliet', 'dangal', 'bhaag milkha bhaag', 'ardaas', 'suryavansham', 'baby',
+          'extraction', 'hera pheri', 'holiday', 'singham', 'chal mera putt', 'ashke', 'love ajj kal', 'lahoriye',
+          'sufna', 'qismat', 'Pyaasa', ' Do Bigha Zamin', 'Awaara', ' Kaagaz Ke Phool', ' Devdas', ' Sangam',
+          ' Tere Ghar Ke Samne ', ' Mohabbat Isko Kahete Hain', 'Do Ankhen Barah Haath', 'Kabuliwala', ' Forrest Gump',
+          ' The Godfather', ' Goodfellas ', ' Million Dollar Baby ', 'Dances with Wolves ', ' Blood Diamond', 'Angrej ',
+          ' Shareek', ' Bailaras']
+movie = list(random.choice(movies))
+m2 = list(movie)
+m = create(m2)
+print(m)
+f = game(m, name, movie)
+if (f == 0):
+    print("Thankyou ,Better luck next time")
+else:
+    print("Thankyou")
+
